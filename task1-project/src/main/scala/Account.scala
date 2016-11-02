@@ -8,6 +8,8 @@ class Account(initialBalance: Double, val uid: Int = Bank getUniqueId) {
 	def withdraw(amount: Double): Unit = {
 		if (amount > balance){
 			throw new NoSufficientFundsException("Insufficient funds in account.")
+		} else if (amount < 0){
+			throw new IllegalAmountException("Cannot withdraw negative amount.")
 		} else {
 			balance -= amount
 		}
