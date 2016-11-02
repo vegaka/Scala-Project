@@ -1,5 +1,5 @@
-import main.scala.exceptions.IllegalAmountException
-import main.scala.exceptions.NoSufficientFundsExceptions
+import exceptions.IllegalAmountException
+import exceptions.NoSufficientFundsException
 
 class Account(initialBalance: Double, val uid: Int = Bank getUniqueId) {
 	
@@ -7,7 +7,7 @@ class Account(initialBalance: Double, val uid: Int = Bank getUniqueId) {
 
 	def withdraw(amount: Double): Unit = {
 		if (amount > balance){
-			throw new NoSufficientFundsExceptions("Insufficient funds.")
+			throw new NoSufficientFundsException("Insufficient funds.")
 		} else {
 			balance -= amount
 		}
