@@ -1,5 +1,9 @@
+import java.util.concurrent.{BlockingQueue, LinkedBlockingQueue}
+
 import exceptions._
+
 import scala.collection.mutable._
+import scala.collection.JavaConversions._
 
 object TransactionStatus extends Enumeration {
   val SUCCESS, PENDING, FAILED = Value
@@ -7,22 +11,22 @@ object TransactionStatus extends Enumeration {
 
 class TransactionQueue {
 
-    val transactions = Queue[Transaction]()
+    val transactions: BlockingQueue[Transaction] = new LinkedBlockingQueue()
 
     // Remove and return the first element from the queue
-    def pop: Transaction = transactions.dequeue()
+    def pop: Transaction = transactions.take()
 
     // Return whether the queue is empty
-    def isEmpty: Boolean = transactions.isEmpty
+    def isEmpty: Boolean = transactions.size() == 0
 
     // Add new element to the back of the queue
-    def push(t: Transaction): Unit = transactions.enqueue(t)
+    def push(t: Transaction): Unit = transactions.put(t)
 
     // Return the first element from the queue without removing it
-    def peek: Transaction = transactions.apply(0)
+    def peek: Transaction = transactions.peek()
 
     // Return an iterator to allow you to iterate over the queue
-    def iterator: Iterator[Transaction] = transactions.iterator
+    def iterator: Iterator[Transaction] = transactions.iterator()
 }
 
 class Transaction(val transactionsQueue: TransactionQueue,
@@ -35,6 +39,11 @@ class Transaction(val transactionsQueue: TransactionQueue,
     var status: TransactionStatus.Value = TransactionStatus.PENDING
 
     override def run: Unit = {
+
+        if (amount < 0) {
+            status = TransactionStatus.FAILED
+            throw new IllegalAmountException("Amount must be positive.")
+        }
 
         def doTransaction() = {
             from withdraw amount
@@ -51,6 +60,7 @@ class Transaction(val transactionsQueue: TransactionQueue,
             }
         }
 
-      // Extend this method to satisfy new requirements.
+
+
     }
 }
