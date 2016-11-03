@@ -26,6 +26,7 @@ class Bank(val allowedAttempts: Integer = 3) {
         while (!transactionsQueue.isEmpty) {
             val nextTransaction = transactionsQueue.pop
             executorContext.execute(nextTransaction)
+            processedTransactions.push(nextTransaction)
         }
     }
 

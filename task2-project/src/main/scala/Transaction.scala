@@ -32,26 +32,25 @@ class Transaction(val transactionsQueue: TransactionQueue,
                   val amount: Double,
                   val allowedAttemps: Int) extends Runnable {
 
-  var status: TransactionStatus.Value = TransactionStatus.PENDING
+    var status: TransactionStatus.Value = TransactionStatus.PENDING
 
-  override def run: Unit = {
+    override def run: Unit = {
 
-    def doTransaction() = {
-      from withdraw amount
-      to deposit amount
+        def doTransaction() = {
+            from withdraw amount
+            to deposit amount
+        }
+
+        if (from.uid < to.uid) from synchronized {
+            to synchronized {
+                doTransaction
+            }
+        } else to synchronized {
+            from synchronized {
+                doTransaction
+            }
+        }
+
+      // Extend this method to satisfy new requirements.
     }
-
-    if (from.uid < to.uid) from synchronized {
-      to synchronized {
-        doTransaction
-      }
-    } else to synchronized {
-      from synchronized {
-        doTransaction
-      }
-    }
-
-    // Extend this method to satisfy new requirements.
-
-  }
 }
