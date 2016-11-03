@@ -1,5 +1,5 @@
 import exceptions._
-import scala.collection.mutable
+import scala.collection.mutable._
 
 object TransactionStatus extends Enumeration {
   val SUCCESS, PENDING, FAILED = Value
@@ -7,20 +7,22 @@ object TransactionStatus extends Enumeration {
 
 class TransactionQueue {
 
-  // Remove and return the first element from the queue
-  def pop: Transaction = ???
+    val transactions = Queue[Transaction]()
 
-  // Return whether the queue is empty
-  def isEmpty: Boolean = ???
+    // Remove and return the first element from the queue
+    def pop: Transaction = transactions.dequeue()
 
-  // Add new element to the back of the queue
-  def push(t: Transaction): Unit = ???
+    // Return whether the queue is empty
+    def isEmpty: Boolean = transactions.isEmpty
 
-  // Return the first element from the queue without removing it
-  def peek: Transaction = ???
+    // Add new element to the back of the queue
+    def push(t: Transaction): Unit = transactions.enqueue(t)
 
-  // Return an iterator to allow you to iterate over the queue
-  def iterator: Iterator[Transaction] = ???
+    // Return the first element from the queue without removing it
+    def peek: Transaction = transactions.apply(0)
+
+    // Return an iterator to allow you to iterate over the queue
+    def iterator: Iterator[Transaction] = transactions.iterator
 }
 
 class Transaction(val transactionsQueue: TransactionQueue,
