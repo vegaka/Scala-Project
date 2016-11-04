@@ -1,3 +1,13 @@
-[0m[[0mdebug[0m] [0mRunning TaskDef(AccountTests, sbt.SubclassFingerprintWrapper@bb6aa4f, false, [SuiteSelector])[0m
-[0m[[0mdebug[0m] [0mRunning TaskDef(AccountTransferTests, sbt.SubclassFingerprintWrapper@bb6aa4f, false, [SuiteSelector])[0m
-[0m[[0mdebug[0m] [0mRunning TaskDef(SingleAccountTransferTest, sbt.SubclassFingerprintWrapper@bb6aa4f, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(AccountTests, sbt.SubclassFingerprintWrapper@592fff53, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(SingleAccountTransferTests, sbt.SubclassFingerprintWrapper@592fff53, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(SingleAccountTest, sbt.SubclassFingerprintWrapper@592fff53, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(AccountTransferTests, sbt.SubclassFingerprintWrapper@592fff53, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mSummary for ScalaTest not available.[0m
+[0m[[31merror[0m] [0mFailed: Total 22, Failed 4, Errors 0, Passed 18[0m
+[0m[[0mdebug[0m] [0mPassed tests:[0m
+[0m[[0mdebug[0m] [0m	SingleAccountTest[0m
+[0m[[0mdebug[0m] [0m	AccountTests[0m
+[0m[[31merror[0m] [0mFailed tests:[0m
+[0m[[31merror[0m] [0m	SingleAccountTransferTests[0m
+[0m[[31merror[0m] [0m	AccountTransferTests[0m
+[0m[[31merror[0m] [0m(test:[31mtest[0m) sbt.TestsFailedException: Tests unsuccessful[0m

@@ -55,7 +55,6 @@ class Transaction(val transactionsQueue: TransactionQueue,
             } catch {
                 case e: NoSufficientFundsException => {
                     attempts += 1
-                    Thread.sleep(100L)
                 }
             }
         }

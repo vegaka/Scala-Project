@@ -42,11 +42,13 @@ class Bank(val allowedAttempts: Integer = 3) {
         processedTransactions.iterator.toList
     }
 
-    // Process transactions each second
+    //Process transactions each second
     val timer = new Timer()
     val task = new TimerTask() {
         def run() = Bank.this.processTransactions
     }
-    timer.schedule(task, 1000L, 1000L)
+    timer.schedule(task, 100L, 100L)
+
+
 
 }

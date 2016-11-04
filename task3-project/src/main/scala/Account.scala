@@ -23,22 +23,42 @@ class Account(val accountId: String, val bankId: String, val initialBalance: Dou
   }
 
   def getTransactions: List[Transaction] = {
-    // Should return a list of all Transaction-objects stored in transactions
-    ???
+    transactions.values.toList
   }
 
   def allTransactionsCompleted: Boolean = {
-    // Should return whether all Transaction-objects in transactions are completed
-    ???
+    for (x: Transaction <- transactions.values){
+      if (! x.isCompleted) false
+    }
+    true
   }
 
-  def withdraw(amount: Double): Unit = ??? // Like in part 2
-  def deposit(amount: Double): Unit = ??? // Like in part 2
-  def getBalanceAmount: Double = ??? // Like in part 2
+  def withdraw(amount: Double): Unit =  {
+        if (amount < 0) {
+            throw new IllegalAmountException("Can't withdraw negative amounts.")
+        } else if (amount > balance.amount){
+            throw new NoSufficientFundsException("Insufficient funds in account.")
+        } else {
+            this.synchronized({
+                balance.amount -= amount
+            })
+        }
+    }
+
+  def deposit(amount: Double): Unit = {
+        if (amount < 0){
+            throw new IllegalAmountException("Amount must be positive.")
+        } else {
+            this.synchronized({
+                balance.amount += amount
+            })
+        }
+    }
+
+  def getBalanceAmount: Double = balance.amount
 
   def sendTransactionToBank(t: Transaction): Unit = {
-    // Should send a message containing t to the bank of this account
-    ???
+    BankManager.findBank(bankId) ! t
   }
 
   def transferTo(accountNumber: String, amount: Double): Transaction = {
@@ -73,17 +93,24 @@ class Account(val accountId: String, val bankId: String, val initialBalance: Dou
 
     case TransactionRequestReceipt(to, transactionId, transaction) => {
       // Process receipt
-      ???
+      transactions(transactionId).status = transaction.status
     }
 
-    case BalanceRequest => ??? // Should return current balance
+    case BalanceRequest => getBalanceAmount
 
     case t: Transaction => {
-      // Handle incoming transaction
-      ???
+      if (t.to == accountId){
+        try{
+          deposit(t.amount)
+          t.status = TransactionStatus.SUCCESS
+        } catch{
+          case _: IllegalAmountException => t.status = TransactionStatus.FAILED
+        }
+        sendTransactionToBank(t)
+      }
     }
 
-    case msg => ???
+    case msg => println("WTF")
   }
 
 
