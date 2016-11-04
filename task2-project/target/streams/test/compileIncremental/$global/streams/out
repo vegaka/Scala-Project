@@ -1,15 +1,67 @@
+[0m[[0mdebug[0m] [0m[naha] The Transaction source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m[naha] 	transactions.[0m
+[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0m[naha] Files invalidated by inheriting from (external) Transaction: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0mdebug[0m] [0m[naha] Getting direct dependencies of all sources transitively invalidated by inheritance.[0m
+[0m[[0mdebug[0m] [0m[naha] Getting sources that directly depend on (external) Transaction.[0m
+[0m[[0mdebug[0m] [0m[naha] None of the modified names appears in /home/sander/Documents/Progsprak/Scala-Project/task2-project/src/test/scala/AccountTests.scala. This dependency is not being considered for invalidation.[0m
+[0m[[0mdebug[0m] [0m[naha] The Bank$ source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m[naha] 	timer, task.[0m
+[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0m[naha] Files invalidated by inheriting from (external) Bank$: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0mdebug[0m] [0m[naha] Getting direct dependencies of all sources transitively invalidated by inheritance.[0m
+[0m[[0mdebug[0m] [0m[naha] Getting sources that directly depend on (external) Bank$.[0m
+[0m[[0mdebug[0m] [0m[naha] None of the modified names appears in /home/sander/Documents/Progsprak/Scala-Project/task2-project/src/test/scala/AccountTests.scala. This dependency is not being considered for invalidation.[0m
+[0m[[0mdebug[0m] [0m[naha] The TransactionStatus$ source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m[naha] 	transactions.[0m
+[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0m[naha] Files invalidated by inheriting from (external) TransactionStatus$: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0mdebug[0m] [0m[naha] Getting direct dependencies of all sources transitively invalidated by inheritance.[0m
+[0m[[0mdebug[0m] [0m[naha] Getting sources that directly depend on (external) TransactionStatus$.[0m
+[0m[[0mdebug[0m] [0m[naha] None of the modified names appears in /home/sander/Documents/Progsprak/Scala-Project/task2-project/src/test/scala/AccountTests.scala. This dependency is not being considered for invalidation.[0m
+[0m[[0mdebug[0m] [0m[naha] The Bank source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m[naha] 	timer, task.[0m
+[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0m[naha] Files invalidated by inheriting from (external) Bank: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0mdebug[0m] [0m[naha] Getting direct dependencies of all sources transitively invalidated by inheritance.[0m
+[0m[[0mdebug[0m] [0m[naha] Getting sources that directly depend on (external) Bank.[0m
+[0m[[0mdebug[0m] [0m[naha] None of the modified names appears in /home/sander/Documents/Progsprak/Scala-Project/task2-project/src/test/scala/AccountTests.scala. This dependency is not being considered for invalidation.[0m
 [0m[[0mdebug[0m] [0m[naha] [0m
 [0m[[0mdebug[0m] [0m[naha] Initial source changes: [0m
 [0m[[0mdebug[0m] [0m[naha] 	removed:Set()[0m
-[0m[[0mdebug[0m] [0m[naha] 	added: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] 	added: Set(/home/sander/Documents/Progsprak/Scala-Project/task2-project/src/test/scala/Tests.scala)[0m
 [0m[[0mdebug[0m] [0m[naha] 	modified: Set()[0m
 [0m[[0mdebug[0m] [0m[naha] Invalidated products: Set()[0m
-[0m[[0mdebug[0m] [0m[naha] External API changes: API Changes: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] External API changes: API Changes: Set(NamesChange(Transaction,ModifiedNames(regularNames = transactions, implicitNames = )), NamesChange(Bank$,ModifiedNames(regularNames = timer, task, implicitNames = )), NamesChange(TransactionStatus$,ModifiedNames(regularNames = transactions, implicitNames = )), NamesChange(Bank,ModifiedNames(regularNames = timer, task, implicitNames = )))[0m
 [0m[[0mdebug[0m] [0m[naha] Modified binary dependencies: Set()[0m
-[0m[[0mdebug[0m] [0m[naha] Initial directly invalidated sources: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] Initial directly invalidated sources: Set(/home/sander/Documents/Progsprak/Scala-Project/task2-project/src/test/scala/Tests.scala)[0m
 [0m[[0mdebug[0m] [0m[naha] [0m
 [0m[[0mdebug[0m] [0m[naha] Sources indirectly invalidated by:[0m
 [0m[[0mdebug[0m] [0m[naha] 	product: Set()[0m
 [0m[[0mdebug[0m] [0m[naha] 	binary dep: Set()[0m
 [0m[[0mdebug[0m] [0m[naha] 	external source: Set()[0m
-[0m[[0mdebug[0m] [0mAll initially invalidated sources: Set()[0m
+[0m[[0mdebug[0m] [0mAll initially invalidated sources: Set(/home/sander/Documents/Progsprak/Scala-Project/task2-project/src/test/scala/Tests.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/home/sander/Documents/Progsprak/Scala-Project/task2-project/src/test/scala/Tests.scala)[0m
+[0m[[0minfo[0m] [0mCompiling 1 Scala source to /home/sander/Documents/Progsprak/Scala-Project/task2-project/target/scala-2.10/test-classes...[0m
+[0m[[0mdebug[0m] [0mGetting org.scala-sbt:compiler-interface:0.13.12:component from component compiler for Scala 2.10.6[0m
+[0m[[0mdebug[0m] [0mGetting org.scala-sbt:compiler-interface:0.13.12:component from component compiler for Scala 2.10.6[0m
+[0m[[0mdebug[0m] [0mRunning cached compiler b597240, interfacing (CompilerInterface) with Scala compiler version 2.10.6[0m
+[0m[[0mdebug[0m] [0mCalling Scala compiler with arguments  (CompilerInterface):[0m
+[0m[[0mdebug[0m] [0m	-bootclasspath[0m
+[0m[[0mdebug[0m] [0m	/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jfr.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/classes:/home/sander/.sbt/boot/scala-2.10.6/lib/scala-library.jar[0m
+[0m[[0mdebug[0m] [0m	-classpath[0m
+[0m[[0mdebug[0m] [0m	/home/sander/Documents/Progsprak/Scala-Project/task2-project/target/scala-2.10/test-classes:/home/sander/Documents/Progsprak/Scala-Project/task2-project/target/scala-2.10/classes:/home/sander/.ivy2/cache/org.scalatest/scalatest_2.10/jars/scalatest_2.10-1.9.1.jar:/home/sander/.ivy2/cache/org.scala-lang/scala-actors/jars/scala-actors-2.10.6.jar:/home/sander/.sbt/boot/scala-2.10.6/lib/scala-reflect.jar[0m
+[0m[[0mdebug[0m] [0mScala compilation took 0.916860437 s[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating /home/sander/Documents/Progsprak/Scala-Project/task2-project/src/test/scala/Tests.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /home/sander/Documents/Progsprak/Scala-Project/task2-project/src/test/scala/Tests.scala...[0m
+[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/home/sander/Documents/Progsprak/Scala-Project/task2-project/src/test/scala/Tests.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/home/sander/Documents/Progsprak/Scala-Project/task2-project/src/test/scala/Tests.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] The /home/sander/Documents/Progsprak/Scala-Project/task2-project/src/test/scala/Tests.scala source file has the following implicit definitions changed:[0m
+[0m[[0mdebug[0m] [0m[naha] 	convertToEqualizer, info.[0m
+[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0m[naha] New invalidations:[0m
+[0m[[0mdebug[0m] [0m[naha] 	Set()[0m
+[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] Previously invalidated, but (transitively) depend on new invalidations:[0m
+[0m[[0mdebug[0m] [0m[naha] 	Set()[0m
+[0m[[0mdebug[0m] [0m[naha] All newly invalidated sources after taking into account (previously) recompiled sources:Set()[0m

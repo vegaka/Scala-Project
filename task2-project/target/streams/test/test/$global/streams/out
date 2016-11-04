@@ -1,2 +1,3 @@
-[0m[[0mdebug[0m] [0mRunning TaskDef(AccountTests, sbt.SubclassFingerprintWrapper@46220c3, false, [SuiteSelector])[0m
-[0m[[0mdebug[0m] [0mRunning TaskDef(AccountTransferTests, sbt.SubclassFingerprintWrapper@46220c3, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(AccountTests, sbt.SubclassFingerprintWrapper@bb6aa4f, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(AccountTransferTests, sbt.SubclassFingerprintWrapper@bb6aa4f, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(SingleAccountTransferTest, sbt.SubclassFingerprintWrapper@bb6aa4f, false, [SuiteSelector])[0m
