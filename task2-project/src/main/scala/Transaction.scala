@@ -45,6 +45,27 @@ class Transaction(val transactionsQueue: TransactionQueue,
             throw new IllegalAmountException("Amount must be positive.")
         }
 
+        var attempts = 0
+
+        while (attempts < allowedAttemps) {
+            try {
+                processTransaction
+                status = TransactionStatus.SUCCESS
+                attempts = allowedAttemps
+            } catch {
+                case e: NoSufficientFundsException => {
+                    attempts += 1
+                    Thread.sleep(100L)
+                }
+            }
+        }
+
+        if (status != TransactionStatus.SUCCESS) {
+            status = TransactionStatus.FAILED
+        }
+    }
+
+    def processTransaction: Unit = {
         def doTransaction() = {
             from withdraw amount
             to deposit amount
@@ -59,8 +80,5 @@ class Transaction(val transactionsQueue: TransactionQueue,
                 doTransaction
             }
         }
-
-
-
     }
 }
