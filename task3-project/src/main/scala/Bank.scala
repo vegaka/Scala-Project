@@ -29,12 +29,22 @@ class Bank(val bankId: String) extends Actor {
 
     def findAccount(accountId: String): Option[ActorRef] = {
         // Use BankManager to look up an account with ID accountId
-        Option(BankManager.findAccount(bankId, accountId))
+        try {
+            val account = BankManager.findAccount(bankId, accountId)
+            Option(account)
+        } catch {
+            case _:NoSuchElementException => None : Option[ActorRef]
+        }
     }
 
     def findOtherBank(bankId: String): Option[ActorRef] = {
         // Use BankManager to look up a different bank with ID bankId
-        Option(BankManager.findBank(bankId))
+        try {
+            val bank = BankManager.findBank(bankId)
+            Option(bank)
+        } catch {
+            case _:NoSuchElementException => None : Option[ActorRef]
+        }
 
     }
 
@@ -70,9 +80,21 @@ class Bank(val bankId: String) extends Actor {
         // HINT: Make use of the variables that have been defined above.
 
         if (toBankId == bankId) {
-            findAccount(toAccountId).get ! t
+            val otherAccount = findAccount(toAccountId)
+            if (!otherAccount.isEmpty) {
+                findAccount(toAccountId).get ! t
+            } else {
+                t.status = TransactionStatus.FAILED
+                BankManager.findBank(bankId) ! new TransactionRequestReceipt(t.from, t.id, t)
+            }
         } else {
-            findOtherBank(toBankId).get ! t
+            val otherBank = findOtherBank(toBankId)
+            if (!otherBank.isEmpty) {
+                otherBank.get ! t
+            } else {
+                t.status = TransactionStatus.FAILED
+                BankManager.findBank(bankId) ! new TransactionRequestReceipt(t.from, t.id, t)
+            }
         }
 
         /*

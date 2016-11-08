@@ -95,6 +95,9 @@ class Account(val accountId: String, val bankId: String, val initialBalance: Dou
 
         case TransactionRequestReceipt(to, transactionId, transaction) => {
             // Process receipt
+            if (transaction.status == TransactionStatus.FAILED) {
+                deposit(transaction.amount)
+            }
             transactions(transactionId).status = transaction.status
         }
 
