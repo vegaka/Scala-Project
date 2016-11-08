@@ -53,10 +53,7 @@ class Transaction(val transactionsQueue: TransactionQueue,
                 status = TransactionStatus.SUCCESS
                 attempts = allowedAttemps
             } catch {
-                case e: NoSufficientFundsException => {
-                    attempts += 1
-                    Thread.sleep(100L)
-                }
+                case e: NoSufficientFundsException => attempts += 1
             }
         }
 

@@ -157,7 +157,7 @@ class SingleAccountTransferTests extends FunSuite {
 
         assert((acc1.getBalanceAmount == 2300) && (acc2.getBalanceAmount == 5700))
 
-    }*/
+    }
 
     test("Test 12: Failed transactions should retry and potentially succeed with multiple allowed attempts") {
         var failed = 0
@@ -179,10 +179,10 @@ class SingleAccountTransferTests extends FunSuite {
                 && acc2.getBalanceAmount == 300
                 && acc3.getBalanceAmount == 0)) failed += 1
         }
-
+        println(failed)
         assert(failed <= 5)
 
-    }
+    }*/
 
     test("Test 13: Some transactions should be stopped with only one allowed attempt") {
         var failed = 0
@@ -202,6 +202,7 @@ class SingleAccountTransferTests extends FunSuite {
 
             if (!(acc2.getBalanceAmount != 300 && acc3.getBalanceAmount == 0)) failed += 1
         }
+        println(failed)
         assert(failed <= 5)
     }
 

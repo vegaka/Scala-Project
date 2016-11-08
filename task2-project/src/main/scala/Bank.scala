@@ -47,6 +47,6 @@ class Bank(val allowedAttempts: Integer = 3) {
     val task = new TimerTask() {
         def run() = Bank.this.processTransactions
     }
-    timer.schedule(task, 1000L, 1000L)
+    timer.schedule(task, 100L, 100L)
 
 }
