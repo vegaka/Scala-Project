@@ -1,5 +1,5 @@
 object TransactionStatus extends Enumeration {
-  val SUCCESS, PENDING, FAILED = Value
+    val SUCCESS, PENDING, FAILED = Value
 }
 
 class Transaction(val from: String,
@@ -9,12 +9,12 @@ class Transaction(val from: String,
                   val id: String = java.util.UUID.randomUUID.toString,
                   var receiptReceived: Boolean = false) {
 
-  def isCompleted: Boolean = {
-    this.status != TransactionStatus.PENDING
-  }
+    def isCompleted: Boolean = {
+        this.status != TransactionStatus.PENDING
+    }
 
-  def isSuccessful: Boolean = {
-    isCompleted && this.status == TransactionStatus.SUCCESS
-  }
+    def isSuccessful: Boolean = {
+        isCompleted && this.status == TransactionStatus.SUCCESS
+    }
 
 }

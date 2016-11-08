@@ -12,79 +12,106 @@ case class BalanceRequest()
 
 class Account(val accountId: String, val bankId: String, val initialBalance: Double = 0) extends Actor {
 
-  private var transactions = HashMap[String, Transaction]()
+    private var transactions = HashMap[String, Transaction]()
 
-  class Balance(var amount: Double) {}
+    class Balance(var amount: Double) {}
 
-  val balance = new Balance(initialBalance)
+    val balance = new Balance(initialBalance)
 
-  def getFullAddress: String = {
-    bankId + accountId
-  }
-
-  def getTransactions: List[Transaction] = {
-    // Should return a list of all Transaction-objects stored in transactions
-    ???
-  }
-
-  def allTransactionsCompleted: Boolean = {
-    // Should return whether all Transaction-objects in transactions are completed
-    ???
-  }
-
-  def withdraw(amount: Double): Unit = ??? // Like in part 2
-  def deposit(amount: Double): Unit = ??? // Like in part 2
-  def getBalanceAmount: Double = ??? // Like in part 2
-
-  def sendTransactionToBank(t: Transaction): Unit = {
-    // Should send a message containing t to the bank of this account
-    ???
-  }
-
-  def transferTo(accountNumber: String, amount: Double): Transaction = {
-
-    val t = new Transaction(from = getFullAddress, to = accountNumber, amount = amount)
-
-    if (reserveTransaction(t)) {
-      try {
-        withdraw(amount)
-        sendTransactionToBank(t)
-
-      } catch {
-        case _: NoSufficientFundsException | _: IllegalAmountException =>
-          t.status = TransactionStatus.FAILED
-      }
+    def getFullAddress: String = {
+        bankId + accountId
     }
 
-    t
-
-  }
-
-  def reserveTransaction(t: Transaction): Boolean = {
-    if (!transactions.contains(t.id)) {
-      transactions += (t.id -> t)
-      return true
-    }
-    false
-  }
-
-  override def receive = {
-    case IdentifyActor => sender ! this
-
-    case TransactionRequestReceipt(to, transactionId, transaction) => {
-      // Process receipt
-      ???
+    def getTransactions: List[Transaction] = {
+        transactions.values.toList
     }
 
-    case BalanceRequest => ??? // Should return current balance
-
-    case t: Transaction => {
-      // Handle incoming transaction
-      ???
+    def allTransactionsCompleted: Boolean = {
+        for (x: Transaction <- transactions.values){
+            if (! x.isCompleted) {
+                return false
+            }
+        }
+        true
     }
 
-    case msg => ???
-  }
+    def withdraw(amount: Double): Unit =  {
+        if (amount < 0) {
+            throw new IllegalAmountException("Can't withdraw negative amounts.")
+        } else if (amount > balance.amount){
+            throw new NoSufficientFundsException("Insufficient funds in account.")
+        } else {
+            this.synchronized({
+                balance.amount -= amount
+            })
+        }
+    }
+
+    def deposit(amount: Double): Unit = {
+        if (amount < 0){
+            throw new IllegalAmountException("Amount must be positive.")
+        } else {
+            this.synchronized({
+                balance.amount += amount
+            })
+        }
+    }
+
+    def getBalanceAmount: Double = balance.amount
+
+    def sendTransactionToBank(t: Transaction): Unit = {
+        BankManager.findBank(bankId) ! t
+    }
+
+    def transferTo(accountNumber: String, amount: Double): Transaction = {
+
+        val t = new Transaction(from = getFullAddress, to = accountNumber, amount = amount)
+
+        if (reserveTransaction(t)) {
+            try {
+                withdraw(amount)
+                sendTransactionToBank(t)
+
+            } catch {
+                case _: NoSufficientFundsException | _: IllegalAmountException =>
+                    t.status = TransactionStatus.FAILED
+            }
+        }
+
+        t
+
+    }
+
+    def reserveTransaction(t: Transaction): Boolean = {
+        if (!transactions.contains(t.id)) {
+            transactions += (t.id -> t)
+            return true
+        }
+        false
+    }
+
+    override def receive = {
+        case IdentifyActor => sender ! this
+
+        case TransactionRequestReceipt(to, transactionId, transaction) => {
+            // Process receipt
+            transactions(transactionId).status = transaction.status
+        }
+
+        case BalanceRequest => sender ! getBalanceAmount
+
+        case t: Transaction => {
+            try {
+                deposit(t.amount)
+                t.status = TransactionStatus.SUCCESS
+            } catch {
+                case _: IllegalAmountException => t.status = TransactionStatus.FAILED
+            }
+            BankManager.findBank(bankId) ! new TransactionRequestReceipt(t.from, t.id, t)
+        }
+
+        case msg => println("WTF")
+    }
 
 
 }
