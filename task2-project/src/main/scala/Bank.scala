@@ -14,6 +14,7 @@ class Bank(val allowedAttempts: Integer = 3) {
     def addTransactionToQueue(from: Account, to: Account, amount: Double): Unit = {
         transactionsQueue push new Transaction(
             transactionsQueue, processedTransactions, from, to, amount, allowedAttempts)
+        processTransactions
     }
 
     @tailrec final def generateAccountId: Int = {
@@ -30,7 +31,7 @@ class Bank(val allowedAttempts: Integer = 3) {
 
             executorContext.execute(nextTransaction)
 
-            processedTransactions.push(nextTransaction)
+            //processedTransactions.push(nextTransaction)
         }
     }
 
@@ -42,11 +43,11 @@ class Bank(val allowedAttempts: Integer = 3) {
         processedTransactions.iterator.toList
     }
 
-    // Process transactions each second
-    val timer = new Timer()
+    // Process transactions each 100 millisecond
+    /*val timer = new Timer()
     val task = new TimerTask() {
         def run() = Bank.this.processTransactions
     }
-    timer.schedule(task, 100L, 100L)
+    timer.schedule(task, 100L, 100L)*/
 
 }

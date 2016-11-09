@@ -42,7 +42,9 @@ class Transaction(val transactionsQueue: TransactionQueue,
 
         if (amount < 0) {
             status = TransactionStatus.FAILED
-            throw new IllegalAmountException("Amount must be positive.")
+            //throw new IllegalAmountException("Amount must be positive.")
+            processedTransactions.push(this)
+            return
         }
 
         var attempts = 0
@@ -53,22 +55,32 @@ class Transaction(val transactionsQueue: TransactionQueue,
                 status = TransactionStatus.SUCCESS
                 attempts = allowedAttemps
             } catch {
-                case e: NoSufficientFundsException => attempts += 1
+                case e: NoSufficientFundsException => {
+                    attempts += 1
+                    Thread.sleep(100L)
+                }
             }
         }
 
         if (status != TransactionStatus.SUCCESS) {
             status = TransactionStatus.FAILED
         }
+
+        processedTransactions.push(this)
     }
 
     def processTransaction: Unit = {
         def doTransaction() = {
-            from withdraw amount
-            to deposit amount
+            from synchronized {
+                to synchronized {
+                    from withdraw amount
+                    to deposit amount
+                }
+            }
         }
 
-        if (from.uid < to.uid) from synchronized {
+
+        /*if (from.uid < to.uid) from synchronized {
             to synchronized {
                 doTransaction
             }
@@ -76,6 +88,7 @@ class Transaction(val transactionsQueue: TransactionQueue,
             from synchronized {
                 doTransaction
             }
-        }
+        }*/
+        doTransaction()
     }
 }
